@@ -31,7 +31,8 @@ public class TodoController {
      */
     @GetMapping("v1/todo/id/{todoId}")
     public ResponseEntity<? extends CommonResponse> getTodoV1(@PathVariable int todoId) {
-        Optional<TodoVO> todo = todoService.selectTodoByTodoId(todoId);
+        /** TODO: 아래 userId(1)은 추후 수정 */
+        Optional<TodoVO> todo = todoService.selectTodoByTodoIdAndUserId(todoId, 1);
 
         if(!todo.isPresent()) // todo에 값이 있는지 검사한다.
             return ResponseEntity

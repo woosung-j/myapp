@@ -9,6 +9,12 @@
         WHERE TODO_ID = #{todoId}
     </select>
 
+    <select id="selectTodoByTodoIdAndUserId" resultType="TodoVO">
+        SELECT TODO_ID, USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER
+        FROM TODO_BOARD
+        WHERE TODO_ID = #{todoId} and USER_ID = #{userId}
+    </select>
+
     <select id="selectTodosByUserId" resultType="TodoVO">
         SELECT TODO_ID, USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER
         FROM TODO_BOARD
