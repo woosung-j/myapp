@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.todo.mapper.TodoMapper">
+    <select id="selectTodoByTodoId" resultType="TodoVO">
+        SELECT TODO_ID, USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER
+        FROM TODO_BOARD
+        WHERE TODO_ID = #{todoId}
+    </select>
+
+    <select id="selectTodosByUserId" resultType="TodoVO">
+        SELECT TODO_ID, USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER
+        FROM TODO_BOARD
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="insertTodo" parameterType="TodoVO">
+        <selectKey resultType="int" keyProperty="todoId" order="AFTER">
+            SELECT MAX(TODO_ID) FROM TODO_BOARD
+        </selectKey>
+        INSERT INTO TODO_BOARD(USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER)
+        VALUES(#{userId}, #{todoTitle}, #{todoContent}, #{startDate}, #{endDate}, now(), #{createUser}, now(), #{updateUser})
+    </insert>
+
+    <update id="updateTodo" parameterType="TodoVO">
+        UPDATE TODO_BOARD
+        SET TODO_TITLE = #{todoTitle},
+            TODO_CONTENT = #{todoContent},
+            START_DATE = #{startDate},
+            END_DATE = #{endDate},
+            UPDATE_DATE = now(),
+            UPDATE_USER = #{updateUser}
+        WHERE TODO_ID = #{todoId} and USER_ID = #{userId}
+    </update>
+
+    <delete id="deleteTodo" parameterType="map">
+        DELETE FROM TODO_BOARD
+        WHERE TODO_ID = #{todoId} and USER_ID = #{userId}
+    </delete>
+</mapper>
