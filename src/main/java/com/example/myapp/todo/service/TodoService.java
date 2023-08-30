@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface TodoService {
     Optional<TodoVO> selectTodoByTodoId(int todoId);
+    Optional<TodoVO> selectTodoByTodoIdAndUserId(int todoId, int userId);
     List<TodoVO> selectTodosByUserId(int userId);
     int insertTodo(TodoVO todoVO);
     int updateTodo(TodoVO todoVO);
