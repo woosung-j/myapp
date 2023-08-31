@@ -13,6 +13,8 @@ public interface TodoMapper {
     Optional<TodoVO> selectTodoByTodoIdAndUserId(@Param("todoId") int todoId,
                                         @Param("userId") int userId);
     List<TodoVO> selectTodosByUserId(int userId);
+
+    List<TodoVO> selectTodosByUserIdAndYearMonth(@Param("userId") int userId, @Param("yearMonth") String yearMonth);
     int insertTodo(TodoVO todoVO);
     int updateTodo(TodoVO todoVO);
     int deleteTodo(@Param("todoId") int todoId,

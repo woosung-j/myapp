@@ -24,11 +24,18 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Optional<TodoVO> selectTodoByTodoIdAndUserId(int todoId, int userId) { return todoMapper.selectTodoByTodoIdAndUserId(todoId, userId); }
+    public Optional<TodoVO> selectTodoByTodoIdAndUserId(int todoId, int userId) {
+        return todoMapper.selectTodoByTodoIdAndUserId(todoId, userId);
+    }
 
     @Override
     public List<TodoVO> selectTodosByUserId(int userId) {
         return todoMapper.selectTodosByUserId(userId);
+    }
+
+    @Override
+    public List<TodoVO> selectTodosByUserIdAndYearMonth(int userId, String yearMonth) {
+        return todoMapper.selectTodosByUserIdAndYearMonth(userId, yearMonth);
     }
 
     @Override
