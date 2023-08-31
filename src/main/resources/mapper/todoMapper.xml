@@ -30,7 +30,7 @@
     <select id="selectTodosByUserIdAndDay" resultType="TodoVO">
         SELECT TODO_ID, USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, TODO_DONE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER
         FROM TODO_BOARD
-        WHERE USER_ID = #{userId} AND DATE_FORMAT(#{yearMonth}, '%Y-%m-%D') BETWEEN DATE_FORMAT(START_DATE, '%Y-%m') AND DATE_FORMAT(END_DATE, '%Y-%m')
+        WHERE USER_ID = #{userId} AND DATE_FORMAT(#{day}, '%Y-%m-%D') BETWEEN DATE_FORMAT(START_DATE, '%Y-%m-%D') AND DATE_FORMAT(END_DATE, '%Y-%m-%D')
     </select>
 
     <insert id="insertTodo" parameterType="TodoVO">
