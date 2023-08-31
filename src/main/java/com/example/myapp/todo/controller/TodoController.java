@@ -43,13 +43,25 @@ public class TodoController {
     }
 
     /**
-     * userID에 해당하는 모든 todo를 반환한다.
+     * userID에 해당하는 모든 To do 리스트를 반환한다.
      * @param userId
      * @return List<TodoVO>
      */
     @GetMapping("v1/todo/list/{userId}")
     public ResponseEntity<? extends CommonResponse> getTodosV1(@PathVariable int userId) {
         List<TodoVO> todos = todoService.selectTodosByUserId(userId);
+        return ResponseEntity.ok().body(new ListResponse<>(todos));
+    }
+
+    /**
+     * 해당 년/월에 해당하는 유저의 To do 리스트를 반환한다.
+     * @param yearMonth = (yyyy-MM-dd) dd는 01로 고정한다.
+     * @param userId
+     * @return List<TodoVO>
+     */
+    @GetMapping("v1/todo/list/{yearMonth}/{userId}")
+    public ResponseEntity<? extends CommonResponse> getTodosV1(@PathVariable String yearMonth, @PathVariable int userId) {
+        List<TodoVO> todos = todoService.selectTodosByUserIdAndYearMonth(userId, yearMonth);
         return ResponseEntity.ok().body(new ListResponse<>(todos));
     }
 

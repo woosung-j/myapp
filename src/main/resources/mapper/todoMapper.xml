@@ -21,6 +21,12 @@
         WHERE USER_ID = #{userId}
     </select>
 
+    <select id="selectTodosByUserIdAndYearMonth" resultType="TodoVO">
+        SELECT TODO_ID, USER_ID, TODO_TITLE, TODO_CONTENT, START_DATE, END_DATE, CREATE_DATE, CREATE_USER, UPDATE_DATE, UPDATE_USER
+        FROM TODO_BOARD
+        WHERE USER_ID = #{userId} AND DATE_FORMAT(#{yearMonth}, '%Y-%m') BETWEEN DATE_FORMAT(START_DATE, '%Y-%m') AND DATE_FORMAT(END_DATE, '%Y-%m')
+    </select>
+
     <insert id="insertTodo" parameterType="TodoVO">
         <selectKey resultType="int" keyProperty="todoId" order="AFTER">
             SELECT MAX(TODO_ID) FROM TODO_BOARD
