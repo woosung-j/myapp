@@ -48,20 +48,32 @@ public class TodoController {
      * @return List<TodoVO>
      */
     @GetMapping("v1/todo/list/{userId}")
-    public ResponseEntity<? extends CommonResponse> getTodosV1(@PathVariable int userId) {
+    public ResponseEntity<? extends CommonResponse> getTodosByUserIdV1(@PathVariable int userId) {
         List<TodoVO> todos = todoService.selectTodosByUserId(userId);
         return ResponseEntity.ok().body(new ListResponse<>(todos));
     }
 
     /**
      * 해당 년/월에 해당하는 유저의 To do 리스트를 반환한다.
-     * @param yearMonth = (yyyy-MM-dd) dd는 01로 고정한다.
+     * @param month = (yyyy-MM)
      * @param userId
      * @return List<TodoVO>
      */
-    @GetMapping("v1/todo/list/{yearMonth}/{userId}")
-    public ResponseEntity<? extends CommonResponse> getTodosV1(@PathVariable String yearMonth, @PathVariable int userId) {
-        List<TodoVO> todos = todoService.selectTodosByUserIdAndYearMonth(userId, yearMonth);
+    @GetMapping("v1/todo/list/month/{month}/{userId}")
+    public ResponseEntity<? extends CommonResponse> getTodosByUserIdAndMonthV1(@PathVariable String month, @PathVariable int userId) {
+        List<TodoVO> todos = todoService.selectTodosByUserIdAndMonth(userId, month);
+        return ResponseEntity.ok().body(new ListResponse<>(todos));
+    }
+
+    /**
+     * 해당 일에 해당하는 유저의 To do 리스트를 반환한다.
+     * @param day = (yyyy-MM-dd)
+     * @param userId
+     * @return List<TodoVO>
+     */
+    @GetMapping("v1/todo/list/day/{day}/{userId}")
+    public ResponseEntity<? extends CommonResponse> getTodosByUserIdAndDayV1(@PathVariable String day, @PathVariable int userId) {
+        List<TodoVO> todos = todoService.selectTodosByUserIdAndDay(userId, day);
         return ResponseEntity.ok().body(new ListResponse<>(todos));
     }
 

@@ -34,8 +34,13 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<TodoVO> selectTodosByUserIdAndYearMonth(int userId, String yearMonth) {
-        return todoMapper.selectTodosByUserIdAndYearMonth(userId, yearMonth);
+    public List<TodoVO> selectTodosByUserIdAndMonth(int userId, String month) {
+        return todoMapper.selectTodosByUserIdAndMonth(userId, month + "-01");
+    }
+
+    @Override
+    public List<TodoVO> selectTodosByUserIdAndDay(int userId, String day) {
+        return todoMapper.selectTodosByUserIdAndDay(userId, day);
     }
 
     @Override
