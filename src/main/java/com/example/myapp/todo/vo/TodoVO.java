@@ -28,6 +28,7 @@ public class TodoVO {
     @NotNull(message = "{valid.endDate.notNull}")
     private String endDate;
 
+    private boolean todoDone;
     private String createDate;
     private int createUser;
     private String updateDate;
