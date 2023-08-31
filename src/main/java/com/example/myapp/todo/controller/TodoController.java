@@ -99,7 +99,7 @@ public class TodoController {
      * @param todoVO
      * @return (성공: 200 OK, 실패: 500 Error)
      */
-    @PatchMapping("v1/todo")
+    @PutMapping("v1/todo")
     public ResponseEntity<? extends CommonResponse> fixTodoV1(@RequestBody TodoVO todoVO) {
         int cnt = todoService.updateTodo(todoVO);
 
