@@ -10,13 +10,11 @@ import java.util.Optional;
 @Mapper
 public interface TodoMapper {
     Optional<TodoVO> selectTodoByTodoId(int todoId);
-    Optional<TodoVO> selectTodoByTodoIdAndUserId(@Param("todoId") int todoId,
-                                        @Param("userId") int userId);
+    Optional<TodoVO> selectTodoByTodoIdAndUserId(@Param("todoId") int todoId, @Param("userId") int userId);
     List<TodoVO> selectTodosByUserId(int userId);
-
-    List<TodoVO> selectTodosByUserIdAndYearMonth(@Param("userId") int userId, @Param("yearMonth") String yearMonth);
+    List<TodoVO> selectTodosByUserIdAndMonth(@Param("userId") int userId, @Param("month") String month);
+    List<TodoVO> selectTodosByUserIdAndDay(@Param("userId") int userId, @Param("day") String day);
     int insertTodo(TodoVO todoVO);
     int updateTodo(TodoVO todoVO);
-    int deleteTodo(@Param("todoId") int todoId,
-                   @Param("userId") int userId);
+    int deleteTodo(@Param("todoId") int todoId, @Param("userId") int userId);
 }
