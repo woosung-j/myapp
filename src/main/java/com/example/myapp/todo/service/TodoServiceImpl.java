@@ -58,10 +58,15 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public int updateTodo(TodoVO todoVO) {
         /** TODO: 로그인 구현 후 아래 userId를 변경한다. */
-        todoVO.setUserId(1); todoVO.setUpdateUser(1);
+        todoVO.setUserId(1);
 
         /** @return (성공: 1, 실패: 0) */
         return todoMapper.updateTodo(todoVO);
+    }
+
+    @Override
+    public int updateTodoDone(int todoId, int userId, int done) {
+        return todoMapper.updateTodoDone(todoId, userId, done);
     }
 
     @Override

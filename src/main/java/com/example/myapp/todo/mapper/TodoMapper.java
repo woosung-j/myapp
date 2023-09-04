@@ -16,5 +16,6 @@ public interface TodoMapper {
     List<TodoVO> selectTodosByUserIdAndDay(@Param("userId") int userId, @Param("day") String day);
     int insertTodo(TodoVO todoVO);
     int updateTodo(TodoVO todoVO);
+    int updateTodoDone(@Param("todoId") int todoId, @Param("userId") int userId, @Param("done") int done);
     int deleteTodo(@Param("todoId") int todoId, @Param("userId") int userId);
 }

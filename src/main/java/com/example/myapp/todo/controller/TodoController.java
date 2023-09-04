@@ -5,6 +5,7 @@ import com.example.myapp.todo.service.TodoService;
 import com.example.myapp.todo.vo.TodoVO;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,7 +79,7 @@ public class TodoController {
     }
 
     /**
-     * Todo를 추가한다.
+     * To do를 추가한다.
      * @param todoVO
      * @return (성공: todoId, 실패: 500 Error)
      */
@@ -95,7 +96,7 @@ public class TodoController {
     }
 
     /**
-     * Todo를 수정한다.
+     * To do를 수정한다.
      * @param todoVO
      * @return (성공: 200 OK, 실패: 500 Error)
      */
@@ -112,7 +113,25 @@ public class TodoController {
     }
 
     /**
-     * Todo를 삭제한다.
+     * To do 상태를 변경한다.
+     * @param todoId
+     * @param done (완료: 1, 미완료: 0)
+     * @return (성공: 200 OK, 실패: 500 Error)
+     */
+    @PatchMapping("v1/todo/done/{todoId}/{done}")
+    public ResponseEntity<? extends CommonResponse> fixTodoDoneV1(@PathVariable int todoId, @PathVariable int done) {
+        int cnt = todoService.updateTodoDone(todoId, 1, done);
+
+        if(cnt < 1)
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Todo 상태 변경을 실패했습니다."));
+
+        return ResponseEntity.ok().body(new BasicResponse("Todo 상태 변경이 완료되었습니다."));
+    }
+
+    /**
+     * To do를 삭제한다.
      * @param todoId
      * @return (성공: 200 OK, 실패: 500 Error)
      */
