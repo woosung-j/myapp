@@ -14,5 +14,6 @@ public interface TodoService {
     List<TodoVO> selectTodosByUserIdAndDay(int userId, String day);
     int insertTodo(TodoVO todoVO);
     int updateTodo(TodoVO todoVO);
+    int updateTodoDone(int todoId, int userId, int done);
     int deleteTodo(int todoId, int userId);
 }
